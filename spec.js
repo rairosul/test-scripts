@@ -9,7 +9,8 @@ in different situations. */
 
 /*element finds HTML elements on your webpage. It returns an ElementFinder object.
 The ElementFinder object can be used to interact with the element or get information
-from it. Here, sendKeys 'types' values into input elements named 'first' and 'second'.
+from it. by.model returns elements that have the ng-model attribute of a certain value.
+sendKeys 'types' values into input elements named 'first' and 'second'.
 click then clicks a button with that specific id. getText returns the text value of the
 supplied element. by.binding finds an element by PARTIAL match, so any elements
 bound to variables containing the string 'Latest' are returned. This doesn't happen
