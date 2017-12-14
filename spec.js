@@ -3,7 +3,7 @@
 
 describe('Protector Demo App', function() {
 	it('should have a title', function() {
-		browser.get('http://www.example.com/');
+		browser.get('http://www.example.com/', timeout_in_millis);
 		expect(browser.getTitle()).toEqual('Example Domain');
 	});
 });
