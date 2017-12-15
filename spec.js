@@ -1,27 +1,42 @@
-// spec.js for protractor tutorial step 1 - interacting with elements
-// This spec will check for titles of webpages
+// this spec.js for protractor tutorial step 2 - writing multiple scenarios
+// This spec will do a number of checks
 
-/* 'element' is a global function which takes a Locator and returns an ElementFinder.
-ElementFinder has a set of action methods such as click(), getText() and sendKeys.
-Use these methods to interact with an element and get information back from it.
-'by' finds elements in angular apps by locator. by has a set of functions to find elements
-in different situations. */
+/* description of elements and behaviour to follow */
 
-/*element finds HTML elements on your webpage. It returns an ElementFinder object.
-The ElementFinder object can be used to interact with the element or get information
-from it. by.model returns elements that have the ng-model attribute of a certain value.
-sendKeys 'types' values into input elements named 'first' and 'second'.
-click then clicks a button with that specific id. getText returns the text value of the
-supplied element. by.binding finds an element by PARTIAL match, so any elements
-bound to variables containing the string 'Latest' are returned. This doesn't happen
-in this case, but it returns an element of class="ng-binding" - why? */
+describe('Protractor Demo App', function() {
+	// defining variables
+	var firstNumber = element(by.model('first'));
+	var secondNumber = element(by.model('second'));
+	var goButton = element(by.id('gobutton'));
+	var latestResult = element(by.binding('latest'));
 
-describe('Protractor Demo', function() {
+	// defining functions
+	// beforeEach is run before every it block
+	beforeEach(function() {
+		browser.get('http://juliemr.github.io/protractor-demo/')
+	});
+
+	// Tests
+	it('should have a title', function() {
+		expect(browser.getTitle()).toEqual('Super Calculator');
+	});
+
 	it('should add one and two', function() {
-		browser.get('http://juliemr.github.io/protractor-demo/');
-		element(by.model('first')).sendKeys(1);
-		element(by.model('second')).sendKeys(2);
-		element(by.id('gobutton')).click();
-		expect(element(by.binding('latest')).getText()).toEqual('3'); //this will work
+		firstNumber.sendKeys(1);
+		secondNumber.sendKeys(2);
+		goButton.click();
+		expect(latestResult.getText()).toEqual('3'); //this will work
+	});
+
+	it('should add four and six', function() {
+		firstNumber.sendKeys(4);
+		secondNumber.sendKeys(6);
+		goButton.click();
+		expect(latestResult.getText()).toEqual('10');
+	});
+
+	it('should read the value from an input', function() {
+		firstNumber.sendKeys(1);
+		expect(firstNumber.getAttribute('value')).toEqual('1');
 	});
 });
